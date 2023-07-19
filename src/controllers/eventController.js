@@ -1,4 +1,3 @@
-// const EventModel = require('../models/Event')
 const eventService = require('../services/eventService');
 
 // Obtener eventos
@@ -69,25 +68,31 @@ const deleteEventById = async (req, res) => {
   }
 }
 
-// Actualizar un evento completamente
+// Actualizar un evento completamente REVISAR MÉTODO MONGOOSE
 const fullyUpdateEvent = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, category, date, description, image, place, price, capacity, assistance } = req.body
 
-    await eventService.fullyUpdateAnEvent(id, {
-      name,
-      category,
-      date,
-      description,
-      image,
-      place,
-      price,
-      capacity,
-      assistance,
-    })
+    if ((Object.keys(req.body).length === 0)) {
+      res.status(400).json({ message: 'Cuerpo de la solicitud sin datos.' })
 
-    res.status(200).json({ message: 'Evento actualizado exitosamente' })
+    } else {
+      const { name, category, date, description, image, place, price, capacity, assistance } = req.body
+
+      await eventService.fullyUpdateAnEvent(id, {
+        name,
+        category,
+        date,
+        description,
+        image,
+        place,
+        price,
+        capacity,
+        assistance,
+      })
+
+      res.status(200).json({ message: 'Evento actualizado exitosamente' })
+    }
 
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -98,21 +103,27 @@ const fullyUpdateEvent = async (req, res) => {
 const updateEvent = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, category, date, description, image, place, price, capacity, assistance } = req.body
 
-    await eventService.updateAnEvent(id, {
-      name,
-      category,
-      date,
-      description,
-      image,
-      place,
-      price,
-      capacity,
-      assistance,
-    })
+    if ((Object.keys(req.body).length === 0)) {
+      res.status(400).json({ message: 'Cuerpo de la solicitud sin datos.' })
 
-    res.status(200).json({ message: 'Evento actualizado exitosamente' })
+    } else {
+      const { name, category, date, description, image, place, price, capacity, assistance } = req.body
+
+      await eventService.updateAnEvent(id, {
+        name,
+        category,
+        date,
+        description,
+        image,
+        place,
+        price,
+        capacity,
+        assistance,
+      })
+
+      res.status(200).json({ message: 'Evento actualizado exitosamente' })
+    }
 
   } catch (error) {
     res.status(500).json({ error: error.message })
