@@ -44,10 +44,14 @@ const getEventById = async (req, res) => {
   try {
     const { id } = req.params
 
-    // const searchedEvent = await EventModel.findById(id)
     const searchedEvent = await eventService.getAnEventById(id)
 
-    res.status(200).json(searchedEvent)
+    if (searchedEvent) {
+      res.status(200).json(searchedEvent)
+
+    } else {
+      res.status(400).json({ message: 'No se encontró el evento.' })
+    }
 
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -68,18 +72,20 @@ const deleteEventById = async (req, res) => {
   }
 }
 
-// Actualizar un evento completamente REVISAR MÉTODO MONGOOSE
+// Actualizar un evento completamente 
 const fullyUpdateEvent = async (req, res) => {
   try {
     const { id } = req.params
+    const { name, category, date, description, image, place, price, capacity, assistance } = req.body
 
     if ((Object.keys(req.body).length === 0)) {
       res.status(400).json({ message: 'Cuerpo de la solicitud sin datos.' })
 
-    } else {
-      const { name, category, date, description, image, place, price, capacity, assistance } = req.body
+    } else if (!name || !date || !description) {
+      res.status(400).json({ message: 'Faltan datos para actualizar' })
 
-      await eventService.fullyUpdateAnEvent(id, {
+    } else {
+      const updatedEvent = await eventService.fullyUpdateAnEvent(id, {
         name,
         category,
         date,
@@ -91,7 +97,7 @@ const fullyUpdateEvent = async (req, res) => {
         assistance,
       })
 
-      res.status(200).json({ message: 'Evento actualizado exitosamente' })
+      res.status(200).json({ message: 'Evento actualizado exitosamente', updatedEvent })
     }
 
   } catch (error) {

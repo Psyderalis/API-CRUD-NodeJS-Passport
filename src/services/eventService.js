@@ -53,7 +53,9 @@ const deleteAnEventById = async (id) => {
 const fullyUpdateAnEvent = async (id, newData) => {
   try {
 
-    await EventModel.replaceOne({ _id: id }, newData)
+    const fullyUpdatedEvent = await EventModel.findOneAndUpdate({ _id: id }, newData)
+
+    return fullyUpdatedEvent
 
   } catch (error) {
     throw new Error(error)
