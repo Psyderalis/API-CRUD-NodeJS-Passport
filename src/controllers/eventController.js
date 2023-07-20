@@ -65,7 +65,7 @@ const deleteEventById = async (req, res) => {
 
     await eventService.deleteAnEventById(id)
 
-    res.status(200).json({ message: 'Evento eliminado exitosamente' })
+    res.status(200).json({ message: 'Evento eliminado exitosamente.' })
 
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -78,10 +78,7 @@ const fullyUpdateEvent = async (req, res) => {
     const { id } = req.params
     const { name, category, date, description, image, place, price, capacity, assistance } = req.body
 
-    if ((Object.keys(req.body).length === 0)) {
-      res.status(400).json({ message: 'Cuerpo de la solicitud sin datos.' })
-
-    } else if (!name || !date || !description) {
+    if (!name || !date || !description || !category) {
       res.status(400).json({ message: 'Faltan datos para actualizar' })
 
     } else {
@@ -97,7 +94,7 @@ const fullyUpdateEvent = async (req, res) => {
         assistance,
       })
 
-      res.status(200).json({ message: 'Evento actualizado exitosamente', updatedEvent })
+      res.status(200).json({ message: 'Evento actualizado exitosamente.', updatedEvent })
     }
 
   } catch (error) {
@@ -128,7 +125,7 @@ const updateEvent = async (req, res) => {
         assistance,
       })
 
-      res.status(200).json({ message: 'Evento actualizado exitosamente' })
+      res.status(200).json({ message: 'Evento actualizado exitosamente.' })
     }
 
   } catch (error) {

@@ -1,6 +1,9 @@
 const express = require('express')
 const connectDB = require('./db')
 const eventRouter = require('./router/eventRouter')
+const swaggerUI = require('swagger-ui-express')
+const swaggerDoc = require('./api-docs.json');
+
 const { PORT } = require('./config')
 
 const app = express()
@@ -8,6 +11,8 @@ const app = express()
 app.use(express.json())
 
 app.use('/api/events', eventRouter)
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 connectDB()
 

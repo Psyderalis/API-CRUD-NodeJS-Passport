@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Amazing Events API docs",
+    "version": "0.0.0"
+  },
+  "paths": {
+    "/api/events": {
+      "get": {
+        "summary": "Obtener todos los eventos.",
+        "responses": {
+          "200": {
+            "description": "Se obtuvieron los eventos."
+          },
+          "500": {
+            "description": "Fallo interno del servidor."
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un evento y guardarlo en la base de datos.",
+        "responses": {
+          "201": {
+            "description": "Evento creado exitosamente."
+          },
+          "400": {
+            "description": "No se pudo crear el evento."
+          },
+          "500": {
+            "description": "Fallo interno del servidor."
+          }
+        }
+      }
+    },
+    "/api/events/{eventId}": {
+      "get": {
+        "summary": "Obtener un evento mediante su id.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Id del evento que se desea obtener."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se obtuvo el evento solicitado."
+          },
+          "400": {
+            "description": "No se encontró el evento."
+          },
+          "500": {
+            "description": "Fallo interno del servidor."
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar todos los datos de un evento.",
+        "responses": {
+          "200": {
+            "description": "Evento actualizado exitosamente."
+          },
+          "400": {
+            "description": "Faltan datos para actualizar."
+          },
+          "500": {
+            "description": "Fallo interno del servidor."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Actualizar al menos un dato de un evento.",
+        "responses": {
+          "200": {
+            "description": "Evento actualizado exitosamente."
+          },
+          "400": {
+            "description": "Cuerpo de la solicitud sin datos."
+          },
+          "500": {
+            "description": "Fallo interno del servidor."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un evento de la base de datos.",
+        "responses": {
+          "200": {
+            "description": "Evento eliminado exitosamente."
+          },
+          "500": {
+            "description": "Fallo interno del servidor."
+          }
+        }
+      }
+    }
+  }
+}
