@@ -13,7 +13,7 @@ const getEvents = async (req, res) => {
 // Crear un nuevo evento
 const createEvent = async (req, res) => {
   try {
-    const { name, category, date, description, image, place, price, capacity, assistance } = req.body
+    const { name, category, date, description, image, place, price, capacity, assistance, estimate } = req.body
 
     const savedEvent = await eventService.createAnEvent({
       name,
@@ -25,6 +25,7 @@ const createEvent = async (req, res) => {
       price,
       capacity,
       assistance,
+      estimate
     })
 
     if (savedEvent) {

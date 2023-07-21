@@ -32,17 +32,21 @@ const eventSchema = new Schema({
   assistance: {
     type: Number,
     min: 0
+  },
+  estimate: {
+    type: Number,
+    min: 0
   }
 })
 
 // creando métodos
 
-eventSchema.methods.getFormattedDate = () => this.date.toLocaleDateString()
+// eventSchema.methods.getFormattedDate = () => this.date.toLocaleDateString()
 
-eventSchema.methods.changeName = (newName) => this.name = newName
+// eventSchema.methods.changeName = (newName) => this.name = newName
 
 // creando modelo a partir del esquema
-const Event = mongoose.model('Evento', eventSchema)
+const EventModel = mongoose.model('Evento', eventSchema)
 
 // exportando
-module.exports = Event
+module.exports = EventModel

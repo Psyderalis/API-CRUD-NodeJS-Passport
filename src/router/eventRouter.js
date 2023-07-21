@@ -7,12 +7,14 @@ const {
 	fullyUpdateEvent,
 	updateEvent,
 } = require('../controllers/eventController')
+const { createEventValidations } = require('../middlewares/dataValidations')
+
 
 const router = express.Router()
 
 router.get('/', getEvents)
 
-router.post('/', createEvent)
+router.post('/', createEventValidations, createEvent)
 
 router.get('/:id', getEventById)
 
