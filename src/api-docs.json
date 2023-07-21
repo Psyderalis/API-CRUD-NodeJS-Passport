@@ -8,6 +8,7 @@
     "schemas": {
       "Event": {
         "type": "object",
+        "description": "Modelo de evento con todas las propiedades.",
         "properties": {
           "name": {
             "type": "String",
@@ -66,8 +67,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref":"#/components/schemas/Event"
-                } 
+                  "$ref": "#/components/schemas/Event"
+                }
               }
             }
           },
@@ -109,9 +110,9 @@
           {
             "in": "path",
             "name": "eventId",
+            "example": "64b6c358b53db2a4f0f3abe2",
             "schema": {
-              "type": "string",
-              "example": "64b6c358b53db2a4f0f3abe2"
+              "type": "string"
             },
             "required": true,
             "description": "Id del evento que se desea obtener."
@@ -135,9 +136,9 @@
           {
             "in": "path",
             "name": "eventId",
+            "example": "64b6c358b53db2a4f0f3abe2",
             "schema": {
-              "type": "string",
-              "example": "64b6c358b53db2a4f0f3abe2"
+              "type": "string"
             },
             "required": true,
             "description": "Id del evento que se desea actualizar."
@@ -172,9 +173,9 @@
           {
             "in": "path",
             "name": "eventId",
+            "example": "64b6c358b53db2a4f0f3abe2",
             "schema": {
-              "type": "string",
-              "example": "64b6c358b53db2a4f0f3abe2"
+              "type": "string"
             },
             "required": true,
             "description": "Id del evento que se desea actualizar."
@@ -215,6 +216,7 @@
           {
             "in": "path",
             "name": "eventId",
+            "example": "eventId",
             "schema": {
               "type": "string"
             },
