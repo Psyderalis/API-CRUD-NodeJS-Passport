@@ -19,11 +19,12 @@ const createEventValidations = (req, res, next) => {
       if (!price) errorMsg.push('Debe ingresar propiedad price.')
       if (!capacity) errorMsg.push('Debe ingresar propiedad capacity.')
       if (!assistance && !estimate) errorMsg.push('Debe ingresar propiedad assistance o estimate según corresponda.')
-    }
 
-    res.status(400).json({ message: errorMsg })
+      res.status(400).json({ message: errorMsg })
+    }
   }
 }
+
 module.exports = {
   createEventValidations
 }
