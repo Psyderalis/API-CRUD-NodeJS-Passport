@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema
-
-const eventSchema = new Schema({
+const eventObj = {
   name: {
     type: String,
     required: true
@@ -37,7 +35,11 @@ const eventSchema = new Schema({
     type: Number,
     min: 0
   }
-})
+}
+
+const Schema = mongoose.Schema
+
+const eventSchema = new Schema(eventObj)
 
 // creando métodos
 
@@ -49,4 +51,7 @@ const eventSchema = new Schema({
 const EventModel = mongoose.model('Event', eventSchema)
 
 // exportando
-module.exports = EventModel
+module.exports = {
+  EventModel,
+  eventObj
+}
