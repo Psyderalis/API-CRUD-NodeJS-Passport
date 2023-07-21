@@ -62,7 +62,14 @@
         "summary": "Obtener todos los eventos.",
         "responses": {
           "200": {
-            "description": "Se obtuvieron los eventos."
+            "description": "Se obtuvieron los eventos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Event"
+                } 
+              }
+            }
           },
           "500": {
             "description": "Fallo interno del servidor."
