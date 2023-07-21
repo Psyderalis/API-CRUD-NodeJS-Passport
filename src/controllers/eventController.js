@@ -82,7 +82,7 @@ const fullyUpdateEvent = async (req, res) => {
       res.status(400).json({ message: 'Faltan datos para actualizar' })
 
     } else {
-      const updatedEvent = await eventService.fullyUpdateAnEvent(id, {
+      await eventService.fullyUpdateAnEvent(id, {
         name,
         category,
         date,
@@ -94,7 +94,7 @@ const fullyUpdateEvent = async (req, res) => {
         assistance,
       })
 
-      res.status(200).json({ message: 'Evento actualizado exitosamente.', updatedEvent })
+      res.status(200).json({ message: 'Evento actualizado exitosamente.' })
     }
 
   } catch (error) {

@@ -9,7 +9,6 @@ const eventSchema = new Schema({
   },
   category: {
     type: String,
-    // enum: ['Conferencia', 'Taller', 'Seminario']
     required: true
   },
   date: {

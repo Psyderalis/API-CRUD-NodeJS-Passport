@@ -4,6 +4,58 @@
     "title": "Amazing Events API docs",
     "version": "0.0.0"
   },
+  "components": {
+    "schemas": {
+      "Event": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "String",
+            "required": true,
+            "example": "My Event"
+          },
+          "category": {
+            "type": "String",
+            "required": true,
+            "example": "My event category"
+          },
+          "date": {
+            "type": "String",
+            "required": true,
+            "example": "2023-07-20"
+          },
+          "description": {
+            "type": "String",
+            "required": true,
+            "example": "My event description."
+          },
+          "image": {
+            "type": "String",
+            "example": "my-event-image-url"
+          },
+          "place": {
+            "type": "String",
+            "example": "My event place"
+          },
+          "price": {
+            "type": "Number",
+            "min": 0,
+            "example": 20
+          },
+          "capacity": {
+            "type": "Number",
+            "min": 0,
+            "example": 50000
+          },
+          "assistance": {
+            "type": "Number",
+            "min": 0,
+            "example": 35000
+          }
+        }
+      }
+    }
+  },
   "paths": {
     "/api/events": {
       "get": {
@@ -19,6 +71,17 @@
       },
       "post": {
         "summary": "Crear un evento y guardarlo en la base de datos.",
+        "requestBody": {
+          "description": "Cuerpo de la solicitud. Al menos se debe ingresar name, date, category y description.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "Evento creado exitosamente."
@@ -40,7 +103,8 @@
             "in": "path",
             "name": "eventId",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "64b6c358b53db2a4f0f3abe2"
             },
             "required": true,
             "description": "Id del evento que se desea obtener."
@@ -60,6 +124,29 @@
       },
       "put": {
         "summary": "Actualizar todos los datos de un evento.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "schema": {
+              "type": "string",
+              "example": "64b6c358b53db2a4f0f3abe2"
+            },
+            "required": true,
+            "description": "Id del evento que se desea actualizar."
+          }
+        ],
+        "requestBody": {
+          "description": "Cuerpo de la solicitud. Se deben ingresar todas las propiedades el evento.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Evento actualizado exitosamente."
@@ -74,6 +161,35 @@
       },
       "patch": {
         "summary": "Actualizar al menos un dato de un evento.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "schema": {
+              "type": "string",
+              "example": "64b6c358b53db2a4f0f3abe2"
+            },
+            "required": true,
+            "description": "Id del evento que se desea actualizar."
+          }
+        ],
+        "requestBody": {
+          "description": "Cuerpo de la solicitud. Se puede actualizar una propiedad o más ( (name, description, category, price, etc.)",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "String",
+                    "example": "My Updated Event"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Evento actualizado exitosamente."
@@ -88,6 +204,17 @@
       },
       "delete": {
         "summary": "Eliminar un evento de la base de datos.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Id del evento que se desea eliminar."
+          }
+        ],
         "responses": {
           "200": {
             "description": "Evento eliminado exitosamente."
