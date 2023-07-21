@@ -4,7 +4,14 @@ const EventModel = require('../models/Event')
 const getAllEvents = async () => {
   try {
     const events = await EventModel.find()
-    return events
+    const currentDate = new Date()
+
+    const data = {
+      currentDate: currentDate.toISOString().slice(0, 10), // Convierte la fecha a formato 'YYYY-MM-DD',
+      events
+    }
+
+    return data
 
   } catch (error) {
     throw new Error(error)

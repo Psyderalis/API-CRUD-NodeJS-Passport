@@ -2,11 +2,14 @@ const express = require('express')
 const connectDB = require('./db')
 const eventRouter = require('./router/eventRouter')
 const swaggerUI = require('swagger-ui-express')
-const swaggerDoc = require('./api-docs.json');
+const swaggerDoc = require('./api-docs.json')
+const cors = require('cors')
 
 const { PORT } = require('./config')
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json())
 

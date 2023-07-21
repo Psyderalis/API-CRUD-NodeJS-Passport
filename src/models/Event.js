@@ -46,7 +46,7 @@ const eventSchema = new Schema({
 // eventSchema.methods.changeName = (newName) => this.name = newName
 
 // creando modelo a partir del esquema
-const EventModel = mongoose.model('Evento', eventSchema)
+const EventModel = mongoose.model('Event', eventSchema)
 
 // exportando
 module.exports = EventModel
