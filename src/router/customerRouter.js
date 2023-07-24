@@ -20,7 +20,7 @@ router.get('/:id', getCustomerById)
 
 router.delete('/:id', deleteCustomerById)
 
-router.put('/:id', fullyUpdateCustomer)
+router.put('/:id', validateCustomer, fullyUpdateCustomer)
 
 router.patch('/:id', updateCustomer)
 

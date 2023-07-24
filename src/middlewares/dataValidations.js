@@ -1,38 +1,46 @@
 const { eventObj } = require("../models/Event")
+const Joi = require('joi')
+
+const schema = Joi.object({
+  name: Joi.string().min(3).max(20).required(),
+  category: Joi.string().pattern(new RegExp('^[A-Za-z]{3,10}$')).required(),
+  date: Joi.date().required(),
+  description: Joi.string().min(10).max(100).required(),
+  image: Joi.string().required(),
+  place: Joi.string().min(3).max(20).required(),
+  price: Joi.number().required(),
+  capacity: Joi.number().min(1).required(),
+  assistance: Joi.number(),
+  estimate: Joi.number()
+}).oxor('assistance', 'estimate')
 
 const validateData = (req, res, next) => {
+
   const { assistance, estimate } = req.body
+  const payload = req.body
 
-  const errorMsg = []
-
-  for (let key in eventObj) {
-    if (key !== 'assistance' && key !== 'estimate' && !(key in req.body)) {
-      errorMsg.push(`Debe ingresar la propiedad '${key}'.`)
-    }
+  if (!assistance && !estimate) {
+    return res.status(400).json({ message: 'Debe ingresar propiedad assistance o estimate según corresponda.' })
   }
 
-  if (!assistance && !estimate) errorMsg.push('Debe ingresar propiedad assistance o estimate según corresponda.')
-
-  if (assistance && estimate) errorMsg.push('Debe ingresar solo una de las siguientes propiedades: assistance o estimate.')
-
-  if (errorMsg.length > 0) {
-    res.status(400).json({ message: errorMsg })
-
-  } else {
-    next()
+  if (assistance && estimate) {
+    return res.status(400).json({ message: 'Debe ingresar solo una de las siguientes propiedades: assistance o estimate.' })
   }
-}
 
-const validateId = (req, res, next) => {
-  const { id } = req.params
-  if (!id) {
-    res.status(400).json({ message: 'Debe especificar id' })
-  } else {
-    next()
-  }
+  const { error } = schema.validate({
+    name: payload.name,
+    category: payload.category,
+    date: payload.date,
+    description: payload.description,
+    image: payload.image,
+    place: payload.place,
+    price: payload.price,
+    capacity: payload.capacity
+  })
+
+  error ? res.status(400).json({ message: error.details[0].message }) : next()
 }
 
 module.exports = {
-  validateData,
-  validateId
+  validateData
 }
