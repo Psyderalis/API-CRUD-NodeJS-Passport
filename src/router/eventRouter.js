@@ -7,6 +7,7 @@ const {
 	fullyUpdateEvent,
 	updateEvent,
 } = require('../controllers/eventController')
+
 const { validateData, validateId } = require('../middlewares/dataValidations')
 
 

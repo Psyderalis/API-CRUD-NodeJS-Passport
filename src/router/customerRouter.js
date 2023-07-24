@@ -6,13 +6,15 @@ const {
 	deleteCustomerById,
 	fullyUpdateCustomer,
 	updateCustomer,
-} = require('../controllers/customerController')
+} = require('../controllers/customerControllers.js')
+
+const { validateCustomer } = require('../middlewares/auth.js');
 
 const router = express.Router()
 
 router.get('/', getCustomers)
 
-router.post('/', createCustomer)
+router.post('/', validateCustomer, createCustomer)
 
 router.get('/:id', getCustomerById)
 

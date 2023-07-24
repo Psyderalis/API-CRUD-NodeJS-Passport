@@ -13,10 +13,10 @@ const getCustomers = async (req, res) => {
 // Crear un nuevo customer
 const createCustomer = async (req, res) => {
   try {
-    const {user, email, password, role } = req.body
+    const {userName, email, password, role } = req.body
 
     const savedCustomer = await customerService.createACustomer({
-      user,
+      userName,
       email,
       password,
       role
@@ -71,14 +71,14 @@ const deleteCustomerById = async (req, res) => {
 const fullyUpdateCustomer = async (req, res) => {
   try {
     const { id } = req.params
-    const { user, email, password, role } = req.body
+    const { userName, email, password, role } = req.body
 
-    if (!user || !email || !password || !role) {
+    if (!userName || !email || !password || !role) {
       res.status(400).json({ message: 'Faltan datos para actualizar' })
 
     } else {
       await customerService.fullyUpdateACustomer(id, {
-        user,
+        userName,
         email,
         password,
         role
@@ -101,10 +101,10 @@ const updateCustomer = async (req, res) => {
       res.status(400).json({ message: 'Cuerpo de la solicitud sin datos.' })
 
     } else {
-      const { user, email, password, role } = req.body
+      const { userName, email, password, role } = req.body
 
       await customerService.updateACustomer(id, {
-        user,
+        userName,
         email,
         password,
         role
