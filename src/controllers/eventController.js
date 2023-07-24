@@ -30,9 +30,6 @@ const createEvent = async (req, res) => {
 
     if (savedEvent) {
       res.status(201).json({ message: 'Evento creado exitosamente.', savedEvent })
-
-    } else {
-      res.status(400).json({ message: 'No se pudo crear el evento.' })
     }
 
   } catch (error) {
@@ -77,26 +74,22 @@ const deleteEventById = async (req, res) => {
 const fullyUpdateEvent = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, category, date, description, image, place, price, capacity, assistance } = req.body
+    const { name, category, date, description, image, place, price, capacity, assistance, estimate } = req.body
 
-    if (!name || !date || !description || !category) {
-      res.status(400).json({ message: 'Faltan datos para actualizar' })
+    await eventService.fullyUpdateAnEvent(id, {
+      name,
+      category,
+      date,
+      description,
+      image,
+      place,
+      price,
+      capacity,
+      assistance,
+      estimate
+    })
 
-    } else {
-      await eventService.fullyUpdateAnEvent(id, {
-        name,
-        category,
-        date,
-        description,
-        image,
-        place,
-        price,
-        capacity,
-        assistance,
-      })
-
-      res.status(200).json({ message: 'Evento actualizado exitosamente.' })
-    }
+    res.status(200).json({ message: 'Evento actualizado exitosamente.' })
 
   } catch (error) {
     res.status(500).json({ error: error.message })
