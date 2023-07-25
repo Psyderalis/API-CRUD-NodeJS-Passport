@@ -1,29 +1,29 @@
-const customerService = require('../services/customerService');
+const userService = require('../services/userService');
 
-// Obtener customer
-const getCustomers = async (req, res) => {
+// Obtener usuario
+const getUsers = async (req, res) => {
   try {
-    const customers = await customerService.getAllCustomers()
-    res.status(200).json(customers)
+    const users = await userService.getAllUsers()
+    res.status(200).json(users)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-// Crear un nuevo customer
-const createCustomer = async (req, res) => {
+// Crear un nuevo usuario
+const createUser = async (req, res) => {
   try {
-    const {userName, email, password, role } = req.body
+    const {username, email, password, role } = req.body
 
-    const savedCustomer = await customerService.createACustomer({
-      userName,
+    const savedUser = await userService.createAnUser({
+      username,
       email,
       password,
       role
     })
 
-    if (savedCustomer) {
-      res.status(201).json({ message: 'Usuario creado exitosamente.', savedCustomer })
+    if (savedUser) {
+      res.status(201).json({ message: 'Usuario creado exitosamente.', savedUser })
 
     } else {
       res.status(400).json({ message: 'No se pudo crear el usuario.' })
@@ -34,15 +34,15 @@ const createCustomer = async (req, res) => {
   }
 }
 
-// Obtener un customer
-const getCustomerById = async (req, res) => {
+// Obtener un usuario
+const getUserById = async (req, res) => {
   try {
     const { id } = req.params
 
-    const searchedCustomer = await customerService.getACustomerById(id)
+    const searchedUser = await userService.getAnUserById(id)
 
-    if (searchedCustomer) {
-      res.status(200).json(searchedCustomer)
+    if (searchedUser) {
+      res.status(200).json(searchedUser)
 
     } else {
       res.status(400).json({ message: 'No se encontró el usuario.' })
@@ -53,12 +53,12 @@ const getCustomerById = async (req, res) => {
   }
 }
 
-// Borrar un customer
-const deleteCustomerById = async (req, res) => {
+// Borrar un usuario
+const deleteUserById = async (req, res) => {
   try {
     const { id } = req.params
 
-    await customerService.deleteACustomerById(id)
+    await userService.deleteAnUserById(id)
 
     res.status(200).json({ message: 'Usuario eliminado exitosamente.' })
 
@@ -67,18 +67,18 @@ const deleteCustomerById = async (req, res) => {
   }
 }
 
-// Actualizar un customer completamente 
-const fullyUpdateCustomer = async (req, res) => {
+// Actualizar un usuario completamente 
+const fullyUpdateUser = async (req, res) => {
   try {
     const { id } = req.params
-    const { userName, email, password, role } = req.body
+    const { username, email, password, role } = req.body
 
-    if (!userName || !email || !password || !role) {
+    if (!username || !email || !password || !role) {
       res.status(400).json({ message: 'Faltan datos para actualizar' })
 
     } else {
-      await customerService.fullyUpdateACustomer(id, {
-        userName,
+      await userService.fullyUpdateAnUser(id, {
+        username,
         email,
         password,
         role
@@ -93,7 +93,7 @@ const fullyUpdateCustomer = async (req, res) => {
 }
 
 // Acualizar parcialmente un usuario
-const updateCustomer = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     const { id } = req.params
 
@@ -101,10 +101,10 @@ const updateCustomer = async (req, res) => {
       res.status(400).json({ message: 'Cuerpo de la solicitud sin datos.' })
 
     } else {
-      const { userName, email, password, role } = req.body
+      const { usename, email, password, role } = req.body
 
-      await customerService.updateACustomer(id, {
-        userName,
+      await userService.updateAnUser(id, {
+        usename,
         email,
         password,
         role
@@ -119,10 +119,10 @@ const updateCustomer = async (req, res) => {
 }
 
 module.exports = {
-  getCustomers,
-  createCustomer,
-  getCustomerById,
-  deleteCustomerById,
-  fullyUpdateCustomer,
-  updateCustomer
+  getUsers,
+  createUser,
+  getUserById,
+  deleteUserById,
+  fullyUpdateUser,
+  updateUser
 }

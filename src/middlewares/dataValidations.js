@@ -16,14 +16,13 @@ const schema = Joi.object({
 
 const validateData = (req, res, next) => {
 
-  const { assistance, estimate } = req.body
   const payload = req.body
 
-  if (!assistance && !estimate) {
+  if (!payload.assistance && !payload.estimate) {
     return res.status(400).json({ message: 'Debe ingresar propiedad assistance o estimate según corresponda.' })
   }
 
-  if (assistance && estimate) {
+  if (payload.assistance && payload.estimate) {
     return res.status(400).json({ message: 'Debe ingresar solo una de las siguientes propiedades: assistance o estimate.' })
   }
 

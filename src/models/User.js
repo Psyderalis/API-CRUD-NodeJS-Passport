@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const customerSchema = new Schema({
-  userName: {
+const userSchema = new Schema({
+  username: {
     type: String,
     required: true
   },
@@ -22,7 +22,7 @@ const customerSchema = new Schema({
 })
 
 // creando modelo a partir del esquema
-const CustomerModel = mongoose.model('Customer', customerSchema)
+const UserModel = mongoose.model('User', userSchema)
 
 // exportando
-module.exports = CustomerModel
+module.exports = UserModel

@@ -10,17 +10,17 @@ const generateToken = (payload, secretPassword) => {
 
 const payload = {
   id : 1,
-  userName : 'usuaria',
+  username : 'usuaria',
   role: 'admin'
 }
 
 const secretPassword = 'claveSecreta'
 
-console.log(generateToken(payload, secretPassword))
+// console.log(generateToken(payload, secretPassword))
 
 // *****************************************
 const schema = Joi.object({
-  userName: Joi.string()
+  username: Joi.string()
     .alphanum()
     .min(5)
     .max(20)
@@ -40,10 +40,10 @@ const schema = Joi.object({
 
 const validateUserData = (req, res, next) => {
 
-  const { userName, password, email, role } = req.body
+  const { username, password, email, role } = req.body
 
   const { error, value } = schema.validate({
-    userName,
+    username,
     password,
     email,
     role

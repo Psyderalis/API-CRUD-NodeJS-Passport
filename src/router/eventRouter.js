@@ -6,7 +6,7 @@ const {
 	deleteEventById,
 	fullyUpdateEvent,
 	updateEvent,
-} = require('../controllers/eventController')
+} = require('../controllers/eventControllers')
 
 const { validateData, validateId } = require('../middlewares/dataValidations')
 
