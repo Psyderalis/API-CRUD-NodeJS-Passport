@@ -1,5 +1,24 @@
 const Joi = require('joi')
+const jwt = require('jsonwebtoken');
 
+const generateToken = (payload, secretPassword) => {
+
+  const token = jwt.sign(payload, secretPassword)
+
+  return token
+}
+
+const payload = {
+  id : 1,
+  userName : 'usuaria',
+  role: 'admin'
+}
+
+const secretPassword = 'claveSecreta'
+
+console.log(generateToken(payload, secretPassword))
+
+// *****************************************
 const schema = Joi.object({
   userName: Joi.string()
     .alphanum()
@@ -19,7 +38,7 @@ const schema = Joi.object({
     .required()
 })
 
-const validateCustomer = (req, res, next) => {
+const validateUserData = (req, res, next) => {
 
   const { userName, password, email, role } = req.body
 
@@ -37,6 +56,16 @@ const validateCustomer = (req, res, next) => {
   next()
 }
 
+const authenticate = (req, res, next) => {
+
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+
+}
+
 module.exports = {
-  validateCustomer
+  validateUserData
 }

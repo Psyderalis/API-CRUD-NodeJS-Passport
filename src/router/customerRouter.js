@@ -8,19 +8,19 @@ const {
 	updateCustomer,
 } = require('../controllers/customerControllers.js')
 
-const { validateCustomer } = require('../middlewares/auth.js');
+const { validateUserData } = require('../middlewares/auth.js');
 
 const router = express.Router()
 
 router.get('/', getCustomers)
 
-router.post('/', validateCustomer, createCustomer)
+router.post('/', validateUserData, createCustomer)
 
 router.get('/:id', getCustomerById)
 
 router.delete('/:id', deleteCustomerById)
 
-router.put('/:id', validateCustomer, fullyUpdateCustomer)
+router.put('/:id', validateUserData, fullyUpdateCustomer)
 
 router.patch('/:id', updateCustomer)
 

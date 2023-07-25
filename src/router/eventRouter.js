@@ -8,7 +8,7 @@ const {
 	updateEvent,
 } = require('../controllers/eventController')
 
-const { validateData } = require('../middlewares/dataValidations')
+const { validateData, validateId } = require('../middlewares/dataValidations')
 
 
 const router = express.Router()
@@ -17,9 +17,9 @@ router.get('/', getEvents)
 
 router.post('/', validateData, createEvent)
 
-router.get('/:id', getEventById)
+router.get('/:id', validateId, getEventById)
 
-router.delete('/:id', deleteEventById)
+router.delete('/:id', validateId, deleteEventById)
 
 router.put('/:id', validateData, fullyUpdateEvent)
 
