@@ -24,8 +24,8 @@ const login = async (req, res) => {
         email: user.email
       })
 
-      // res.status(200).json({ message: 'Inicio de sesión exitoso.' }).cookie('userToken', token)
-      res.cookie('userToken', token).status(200).json('Inicio de sesión exitoso.')
+      res.cookie('userToken', token, { expires: new Date() + 4000 })
+        .status(200).json('Inicio de sesión exitoso.')
     }
 
   } catch (error) {
@@ -44,7 +44,13 @@ const getLogged = (req, res) => {
   }
 }
 
+const logout = (req, res) => {
+
+  res.clearCookie('userToken').status(200).json({message: 'Cierre de sesión exitoso.'})
+}
+
 module.exports = {
   login,
-  getLogged
+  getLogged,
+  logout
 }

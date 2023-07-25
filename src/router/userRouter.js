@@ -8,13 +8,13 @@ const {
   updateUser,
 } = require('../controllers/userControllers.js')
 
-const { validateUserData } = require('../middlewares/userDataValidations.js');
+const { validateUserData, validateAvailableUser } = require('../middlewares/userDataValidations.js');
 
 const router = express.Router()
 
 router.get('/', getUsers)
 
-router.post('/', validateUserData, createUser)
+router.post('/', validateAvailableUser, validateUserData, createUser)
 
 router.get('/:id', getUserById)
 

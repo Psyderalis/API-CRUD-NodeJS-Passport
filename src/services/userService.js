@@ -13,6 +13,7 @@ const getAllUsers = async () => {
 }
 
 // Crear un nuevo usuario
+
 const createAnUser = async (userData) => {
   try {
     const newUser = new UserModel(userData)

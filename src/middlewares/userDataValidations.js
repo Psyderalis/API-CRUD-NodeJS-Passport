@@ -1,4 +1,5 @@
 const Joi = require('joi')
+const UserModel = require('../models/User')
 
 const schema = Joi.object({
   username: Joi.string()
@@ -22,7 +23,7 @@ const validateUserData = (req, res, next) => {
 
   const { username, password, email, role } = req.body
 
-  const { error, value } = schema.validate({
+  const { error } = schema.validate({
     username,
     password,
     email,
@@ -32,13 +33,28 @@ const validateUserData = (req, res, next) => {
   if (error) {
     return res.status(400).json({ message: error.details[0].message })
   }
+  next()
+}
+
+const validateAvailableUser = async (req, res, next) => {
+  const { username, email } = req.body
+
+  const usernameFound = await UserModel.findOne({ username: username }).exec()
+
+  const emailFound = await UserModel.findOne({ email: email }).exec()
+
+  if (emailFound) {
+    return res.status(400).json({message: 'Ya existe un usuario registrado con este email.'})
+  }
+
+  if (usernameFound) {
+    return res.status(400).json({message: 'Nombre de usuario no disponible. Intente con otro.'})
+  }
 
   next()
 }
 
-
-// VERIFICAR QUE NO EXISTA USUARIO EN LA BASE DE DATOS ANTES DE CREAR
-
 module.exports = {
-  validateUserData
+  validateUserData,
+  validateAvailableUser
 }
