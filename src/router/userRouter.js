@@ -8,7 +8,7 @@ const {
   updateUser,
 } = require('../controllers/userControllers.js')
 
-const { validateUserData } = require('../middlewares/auth.js');
+const { validateUserData } = require('../middlewares/userDataValidations.js');
 
 const router = express.Router()
 

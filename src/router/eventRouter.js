@@ -8,7 +8,7 @@ const {
 	updateEvent,
 } = require('../controllers/eventControllers')
 
-const { validateData, validateId } = require('../middlewares/dataValidations')
+const { validateData, validateId } = require('../middlewares/eventDataValidations')
 
 
 const router = express.Router()
