@@ -5,7 +5,7 @@ const {
   getUserById,
   deleteUserById,
   fullyUpdateUser,
-  updateUser
+  updateUser,
 } = require('../controllers/userControllers.js')
 
 const { validateUserData } = require('../middlewares/auth.js');

@@ -13,7 +13,7 @@ const getUsers = async (req, res) => {
 // Crear un nuevo usuario
 const createUser = async (req, res) => {
   try {
-    const {username, email, password, role } = req.body
+    const { username, email, password, role } = req.body
 
     const savedUser = await userService.createAnUser({
       username,
@@ -117,6 +117,7 @@ const updateUser = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+
 
 module.exports = {
   getUsers,

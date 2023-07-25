@@ -74,6 +74,7 @@ const updateAnUser = async (id, newData) => {
   }
 }
 
+
 module.exports = {
   getAllUsers,
   createAnUser,

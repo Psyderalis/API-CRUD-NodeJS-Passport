@@ -21,7 +21,6 @@ const secretPassword = 'claveSecreta'
 // *****************************************
 const schema = Joi.object({
   username: Joi.string()
-    .alphanum()
     .min(5)
     .max(20)
     .required(),
@@ -65,6 +64,8 @@ const authenticate = (req, res, next) => {
   }
 
 }
+
+// VERIFICAR QUE NO EXISTA USUARIO EN LA BASE DE DATOS ANTES DE CREAR
 
 module.exports = {
   validateUserData
