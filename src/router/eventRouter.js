@@ -9,15 +9,15 @@ const {
 } = require('../controllers/eventControllers')
 
 const { validateData, validateId } = require('../middlewares/eventDataValidations')
-
+const { authenticate } = require('../middlewares/auth')
 
 const router = express.Router()
 
-router.get('/', getEvents)
+router.get('/', authenticate, getEvents)
 
 router.post('/', validateData, createEvent)
 
-router.get('/:id', validateId, getEventById)
+router.get('/:id', authenticate, validateId, getEventById)
 
 router.delete('/:id', validateId, deleteEventById)
 
