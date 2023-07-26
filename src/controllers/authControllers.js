@@ -11,7 +11,7 @@ const login = async (req, res) => {
     const user = await authService.login(email, password)
 
     if (user === false) {
-      return res.status(400).json({ message: 'El nombre de usuario o contraseña no coinciden.' })
+      return res.status(400).json({ message: 'Contraseña incorrecta.' })
     }
 
     if (user === null) {
@@ -26,7 +26,6 @@ const login = async (req, res) => {
 
       console.log('se generó token: ', token)
 
-      // res.cookie('userToken', token, { expires: new Date() + 4000 })
       res.cookie('userToken', token, { expiresIn: '1h' })
         .status(200).json('Inicio de sesión exitoso.')
     }
